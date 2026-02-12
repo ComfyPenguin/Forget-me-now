@@ -22,3 +22,19 @@ Permet:
 - Consultar informació detallada de cada centre
 - Realitzar tours virtuals
 
+## Inforesidencias
+Web oficial:
+https://www.inforesidencias.com/infoclasificados/lista-anuncios
+
+## Descripció:
+Inforesidencias és una de les plataformes més conegudes a Espanya especialitzada en residències per a persones majors i serveis sociosanitaris.
+
+Funciona principalment com a directori i portal informatiu del sector geriàtric.
+
+### Permet:
+- Buscar residències, institucions mentals, centres de dia, i més. Per província o comunitat autònoma, situació de urgencia, diners, posibles ajudes publiques, etc.
+- Consultar informació bàsica dels centres
+- Accedir a anuncis classificats del sector
+- Publicar anuncis (centres i professionals)
+- Consultar notícies i contingut especialitzat
+- Accedir a formació i recursos per a professionals
