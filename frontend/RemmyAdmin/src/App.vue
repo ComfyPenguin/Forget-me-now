@@ -11,10 +11,8 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </nav>
 
-  <!-- Main content starts below the navbar -->
-  <main class="main-content">
+
     <RouterView />
-  </main>
 </template>
 
 <style scoped>
@@ -31,7 +29,6 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 .nav-container {
-  max-width: 1400px;
   margin: 0 auto;
   height: 100%;
   padding: 0 1.5rem;
@@ -59,17 +56,5 @@ import { RouterLink, RouterView } from 'vue-router'
   border-bottom: 2px solid #2563eb;
 }
 
-.main-content {
-  padding-top: 64px;       /* ← **must match** navbar height */
-  min-height: 100vh;
-}
 
-/* Optional: better mobile feeling */
-@media (max-width: 640px) {
-  .nav-container {
-    padding: 0 1rem;
-    justify-content: center;
-    gap: 2rem;
-  }
-}
 </style>
