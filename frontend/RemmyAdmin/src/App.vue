@@ -3,76 +3,73 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-      <nav>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/GestionPanel">GestionPanel</RouterLink>
-      </nav>
-  </header>
+  <!-- Navigation always stays at the top -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <RouterLink to="/login" class="nav-link">Login</RouterLink>
+      <RouterLink to="/GestionPanel" class="nav-link">Gestion Panel</RouterLink>
+    </div>
+  </nav>
 
-  <RouterView />
+  <!-- Main content starts below the navbar -->
+  <main class="main-content">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;           /* ← you can change this value */
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 1.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.nav-link {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  font-size: 1.05rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.nav-link:hover {
+  color: #2563eb;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.nav-link.router-link-exact-active {
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.main-content {
+  padding-top: 64px;       /* ← **must match** navbar height */
+  min-height: 100vh;
 }
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+/* Optional: better mobile feeling */
+@media (max-width: 640px) {
+  .nav-container {
+    padding: 0 1rem;
+    justify-content: center;
+    gap: 2rem;
   }
 }
 </style>
