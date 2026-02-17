@@ -10,9 +10,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/GestionPanel" class="nav-link">Gestion Panel</RouterLink>
     </div>
   </nav>
-
-
-    <RouterView />
+  <RouterView />
 </template>
 
 <style scoped>

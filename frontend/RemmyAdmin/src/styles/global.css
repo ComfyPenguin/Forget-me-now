@@ -1,70 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
-  /* Dark mode default (your original values) */
-  --bg-dark:      hsl(336 0% 1%);
-  --bg:           hsl(330 0% 4%);
-  --bg-light:     hsl(0 0% 9%);
-  --text:         hsl(0 0% 95%);
-  --text-muted:   hsl(300 0% 69%);
-  --highlight:    hsl(330 0% 39%);
-  --border:       hsl(0 0% 28%);
-  --border-muted: hsl(300 0% 18%);
-  --primary:      hsl(187 57% 58%);
-  --secondary:    hsl(6 68% 74%);
-  --danger:       hsl(9 26% 64%);
-  --warning:      hsl(52 19% 57%);
-  --success:      hsl(146 17% 59%);
-  --info:         hsl(217 28% 65%);
+  /* --- Primary (Blue) --- */
+  --primary-lightest: #EFF6FF;
+  --primary-light: #93C5FD;
+  --primary: #3B82F6;        /* Original */
+  --primary-dark: #2563EB;
+  --primary-darkest: #1E3A8A;
 
-  /* OKLCH overrides (modern browsers win) */
-  --bg-dark:      oklch(0.1 0 207);
-  --bg:           oklch(0.15 0 207);
-  --bg-light:     oklch(0.2 0 207);
-  --text:         oklch(0.96 0 207);
-  --text-muted:   oklch(0.76 0 207);
-  --highlight:    oklch(0.5 0 207);
-  --border:       oklch(0.4 0 207);
-  --border-muted: oklch(0.3 0 207);
-  --primary:      oklch(0.76 0.1 207);
-  --secondary:    oklch(0.76 0.1 27);
-  --danger:       oklch(0.7 0.05 30);
-  --warning:      oklch(0.7 0.05 100);
-  --success:      oklch(0.7 0.05 160);
-  --info:         oklch(0.7 0.05 260);
-}
+  /* --- Secondary (Amber/Orange) --- */
+  --secondary-lightest: #FFFBEB;
+  --secondary-light: #FCD34D;
+  --secondary: #F59E0B;      /* Original */
+  --secondary-dark: #D97706;
+  --secondary-darkest: #78350F;
 
-body.light {
-  /* Light mode fallbacks & OKLCH */
-  --bg-dark:      hsl(0 0% 90%);
-  --bg:           hsl(0 0% 95%);
-  --bg-light:     hsl(300 50% 100%);
-  --text:         hsl(330 0% 4%);
-  --text-muted:   hsl(0 0% 28%);
-  --highlight:    hsl(300 50% 100%);
-  --border:       hsl(300 0% 50%);
-  --border-muted: hsl(340 0% 62%);
-  --primary:      hsl(186 100% 11%);
-  --secondary:    hsl(4 48% 31%);
-  --danger:       hsl(9 21% 41%);
-  --warning:      hsl(52 23% 34%);
-  --success:      hsl(147 19% 36%);
-  --info:         hsl(217 22% 41%);
+  /* --- Neutral (Slate/Gray) --- */
+  --neutral-lightest: #F8FAFC;
+  --neutral-light: #CBD5E1;
+  --neutral: #64748B;        /* Original */
+  --neutral-dark: #334155;
+  --neutral-darkest: #0F172A;
 
-  --bg-dark:      oklch(0.92 0 207);
-  --bg:           oklch(0.96 0 207);
-  --bg-light:     oklch(1 0 207);
-  --text:         oklch(0.15 0 207);
-  --text-muted:   oklch(0.4 0 207);
-  --highlight:    oklch(1 0 207);
-  --border:       oklch(0.6 0 207);
-  --border-muted: oklch(0.7 0 207);
-  --primary:      oklch(0.4 0.1 207);
-  --secondary:    oklch(0.4 0.1 27);
-  --danger:       oklch(0.5 0.05 30);
-  --warning:      oklch(0.5 0.05 100);
-  --success:      oklch(0.5 0.05 160);
-  --info:         oklch(0.5 0.05 260);
+  /* --- Backgrounds --- */
+  --background: #FFFFFF;     /* Original */
+  --background-alt: #F1F5F9; /* Off-white for sectioning */
 }

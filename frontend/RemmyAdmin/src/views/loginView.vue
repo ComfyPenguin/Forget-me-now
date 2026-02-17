@@ -18,11 +18,13 @@ import LoginForm from "@/components/login/loginForm.vue";
 </div>
 </template>
 <style>
+
 .loginContainer {
   display: flex;
   height: calc(100vh - 64px);
-  width: 100%;
+  width: 100vw;                    /* ← change to 100vw (viewport width) */
   background-color: #f3f4f6;
+  margin-left: calc(-50vw + 50%);  /* ← add this to offset any padding */
 }
 
 .left {
