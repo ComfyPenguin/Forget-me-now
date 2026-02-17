@@ -14,7 +14,7 @@ import java.util.List;
 @Table
 public class Social implements Serializable {
     @Serial
-    private static final long serialVersionUID=17L;
+    private static final Long serialVersionUID=17L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Social implements Serializable {
     @Column
     private String name;
 
+    // Relaciones
     @OneToMany(mappedBy = "social")
     private List<CenterSocial> centers;
-
 }

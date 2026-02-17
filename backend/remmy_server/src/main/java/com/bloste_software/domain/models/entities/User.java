@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Table
 public class User implements Serializable {
     @Serial
-    private static final long serialVersionUID=17L;
+    private static final Long serialVersionUID=17L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,15 +30,14 @@ public class User implements Serializable {
     @Column(name = "password_hashed")
     private String passwordHashed;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_role")
-    private UserRole role;
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-
+    // Relaciones
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_role")
+    private UserRole role;
 }

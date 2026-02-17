@@ -11,15 +11,15 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table
-public class CenterType implements Serializable {
+public class Region implements Serializable {
     @Serial
     private static final Long serialVersionUID=17L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_type")
+    @Column(name = "id_region")
     private Long id;
-
+    
     @Column
     private String name;
 

@@ -15,7 +15,7 @@ import java.util.List;
 @Table
 public class Center implements Serializable {
     @Serial
-    private static final long serialVersionUID=17L;
+    private static final Long serialVersionUID=17L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,16 +23,29 @@ public class Center implements Serializable {
     private Long id;
 
     @Column
+    private String name;
+
+    @Column
     private String street;
+
+    @Column
+    private String description;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-   
+
+    // Relaciones
     @OneToMany(mappedBy = "center")
     private List<CenterSocial> socials;
 
+    @ManyToOne
+    @JoinColumn(name = "id_type", nullable = true)
+    private CenterType type;
 
+    @ManyToOne
+    @JoinColumn(name = "id_location", nullable = true)
+    private Location location;
 }

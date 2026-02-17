@@ -13,18 +13,18 @@ import java.io.Serializable;
 @Table
 public class Phone implements Serializable {
     @Serial
-    private static final long serialVersionUID=17L;
+    private static final Long serialVersionUID=17L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_center", nullable = false)
-    private Center center;
-
     @Column
     private String phone;
 
+    // Relaciones
+    @ManyToOne
+    @JoinColumn(name = "id_center", nullable = false)
+    private Center center;
 }

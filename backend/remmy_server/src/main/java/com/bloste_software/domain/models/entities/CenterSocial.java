@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 
+import com.bloste_software.domain.models.relationships.CenterSocialId;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -14,20 +16,22 @@ import java.io.Serializable;
 public class CenterSocial implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "id_center", nullable = false)
-    private Center center;
-
-    @ManyToOne
-    @JoinColumn(name = "id_social", nullable = false)
-    private Social social;
+    @EmbeddedId
+    private CenterSocialId id;
 
     @Column(nullable = false)
     private String link;
+
+    // Relaciones
+    @ManyToOne
+    @MapsId("centerId")
+    @JoinColumn(name = "id_center")
+    private Center center;
+
+    @ManyToOne
+    @MapsId("socialId")
+    @JoinColumn(name = "id_social")
+    private Social social;
 }
