@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import BaseButton from '@/components/util/baseButton.vue'
 const loginForm = ref({
   email: '',
   password: ''
@@ -56,7 +57,7 @@ const handleSubmit = () => {
         <label for="remember" class="checkbox-label">Remember this device</label>
       </div>
 
-      <button type="submit" class="submit-button">Log In →</button>
+      <BaseButton variant="primary" label="Log In →" :animationEnabled="false" @click="handleSubmit" />
     </form>
 
     <div class="footer-section">
@@ -171,27 +172,6 @@ const handleSubmit = () => {
   cursor: pointer;
 }
 
-.submit-button {
-  width: 100%;
-  padding: 0.875rem 1rem;
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 0.5rem;
-}
-
-.submit-button:hover {
-  background-color: var(--primary-dark);
-}
-
-.submit-button:active {
-  background-color: var(--primary-darkest);
-}
 
 .footer-section {
   border-top: 1px solid #e5e7eb;
