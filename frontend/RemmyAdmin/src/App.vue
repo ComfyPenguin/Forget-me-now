@@ -6,11 +6,14 @@ import { RouterLink, RouterView } from 'vue-router'
   <!-- Navigation always stays at the top -->
   <nav class="navbar">
     <div class="nav-container">
+      <RouterLink to="/" class="nav-link">Home</RouterLink>
       <RouterLink to="/login" class="nav-link">Login</RouterLink>
       <RouterLink to="/GestionPanel" class="nav-link">Gestion Panel</RouterLink>
     </div>
   </nav>
-  <RouterView />
+  <main class="main-content">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
@@ -52,6 +55,11 @@ import { RouterLink, RouterView } from 'vue-router'
 .nav-link.router-link-exact-active {
   color: #2563eb;
   border-bottom: 2px solid #2563eb;
+}
+
+.main-content {
+  margin-top: 64px;
+  min-height: calc(100vh - 64px);
 }
 
 
