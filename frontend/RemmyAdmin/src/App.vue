@@ -9,6 +9,8 @@ import { RouterLink, RouterView } from 'vue-router'
       <RouterLink to="/" class="nav-link">Home</RouterLink>
       <RouterLink to="/login" class="nav-link">Login</RouterLink>
       <RouterLink to="/GestionPanel" class="nav-link">Gestion Panel</RouterLink>
+      <RouterLink to="/CreateCenter" class="nav-link">CreateCenter</RouterLink>
+
     </div>
   </nav>
   <main class="main-content">
@@ -22,10 +24,11 @@ import { RouterLink, RouterView } from 'vue-router'
   top: 0;
   left: 0;
   right: 0;
-  height: 64px;           /* ← you can change this value */
+  height: 64px;
+  /* ← you can change this value */
   background-color: white;
   border-bottom: 1px solid #e5e7eb;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
@@ -61,6 +64,4 @@ import { RouterLink, RouterView } from 'vue-router'
   margin-top: 64px;
   min-height: calc(100vh - 64px);
 }
-
-
 </style>
