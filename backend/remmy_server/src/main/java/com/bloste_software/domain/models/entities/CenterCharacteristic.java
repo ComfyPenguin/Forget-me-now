@@ -11,7 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table
-public class center implements Serializable {
+public class CenterCharacteristic implements Serializable {
     @Serial
     private static final long serialVersionUID=17L;
 
@@ -20,7 +20,11 @@ public class center implements Serializable {
     @Column
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "id_center", nullable = false)
+    private Center center;
+
     @Column
-    private String street;
+    private String name;
 
 }
