@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-
-const router = useRouter()
-const route = useRoute()
+import {onMounted, ref } from 'vue'
 
 const isLoading = ref(true)           // ← importante para evitar flash de contenido
 
@@ -21,7 +17,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="app-container">
     <!-- Mientras verificamos auth (muy rápido, pero evita contenido parpadeante) -->
     <div v-if="isLoading" class="loading-screen">
       <div class="spinner"></div>
@@ -29,16 +24,40 @@ onMounted(async () => {
     </div>
 
     <!-- Contenido real de la app (solo se muestra cuando ya sabemos si está logueado o no) -->
-    <div v-else>
-      <router-view />
-    </div>
-  </div>
+    <div v-else class="app-wrapper">
+  <router-view />
+</div>
 </template>
 <style scoped>
-.app-container {
-  min-height: 100vh;
+/* Asegura que TODO el viewport esté disponible (muy importante) */
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
+.app-wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenedor que envuelve router-view (crece automáticamente) */
+.main-content {
+  flex: 1 1 auto;              /* ← esto hace que crezca y ocupe todo el espacio sobrante */
+  width: 100%;
+  min-height: 100%;            /* opcional pero útil en algunos navegadores */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Loading (lo que ya tenías, sin cambios) */
 .loading-screen {
   height: 100vh;
   display: flex;
@@ -46,6 +65,7 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   background: #f8f9fa;
+  width: 100%;                 /* ← asegúrate también aquí */
 }
 
 .spinner {
