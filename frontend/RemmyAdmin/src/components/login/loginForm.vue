@@ -39,6 +39,9 @@ const handleSubmit = () => {
       </div>
 
       <BaseButton variant="primary" label="Log In →" :animationEnabled="false" @click="$router.push('/GestionPanel')" />
+
+      <button class="createAccount" @click="$router.push('/Register')">Create Account</button>
+
     </form>
 
     <div class="footer-section">
@@ -55,6 +58,16 @@ const handleSubmit = () => {
 
 <style lang="scss">
 @import '../../styles/form.css';
+
+.createAccount {
+  display: inline-block; /* O simplemente bórralo si es un <button>, ya que suelen serlo por defecto */
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.createAccount:hover{
+  color: var(--primary-darkest)
+}
 
 .text-center {
   text-align: center;

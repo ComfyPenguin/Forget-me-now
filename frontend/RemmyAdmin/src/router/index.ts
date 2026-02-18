@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/loginView.vue'
 import GestionPanelView from '@/views/gestionPanelView.vue'
 import NewCenterView from '@/views/NewCenterView.vue'
+import RegisterView from '@/views/registerView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/CreateCenter',
       name: 'CreateCenter',
       component: NewCenterView,
+    },
+    {
+      path: '/Register',
+      name: 'Register',
+      component: RegisterView,
     },
     {
       path: '/:pathMatch(.*)*',
