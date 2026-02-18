@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BaseButton from '@/components/util/baseButton.vue';
 import CentersList from '@/components/gestion/centersList.vue';
+import backButton from '@/components/util/backButton.vue';
 
 const handleClick = () => {
     console.log('Button clicked!');
@@ -17,6 +18,7 @@ const handleClick = () => {
     <div>
         <CentersList />
     </div>
+    <backButton></backButton>
 </template>
 
 <style scoped>

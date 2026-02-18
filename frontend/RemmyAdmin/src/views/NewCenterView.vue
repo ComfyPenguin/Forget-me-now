@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import BackButton from '@/components/util/backButton.vue'
 import GeneralInfo from '@/components/newCenter/GeneralInfo.vue'
 import Location from '@/components/newCenter/Location.vue'
 import Email from '@/components/newCenter/Email.vue'
@@ -25,6 +26,7 @@ const handleSubmit = () => {
 }
 
 const handleCancel = () => {
+  //TO-DO
   // Navigate back or reset form
   console.log('Cancelled')
 }
@@ -35,12 +37,7 @@ const handleCancel = () => {
     <!-- Header -->
     <div class="header">
       <div class="header-content">
-        <button class="back-button" @click="handleCancel">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          Volver a Gestión de Centros
-        </button>
+        <BackButton label="Volver a Gestión de Centros" @click="handleCancel" />
       </div>
     </div>
 
