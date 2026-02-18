@@ -86,3 +86,30 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+:root {
+  /* --- Primary (Blue) --- */
+  --primary-lightest: #EFF6FF;
+  --primary-light: #93C5FD;
+  --primary: #3B82F6;        /* Original */
+  --primary-dark: #2563EB;
+  --primary-darkest: #1E3A8A;
+
+  /* --- Secondary (Amber/Orange) --- */
+  --secondary-lightest: #FFFBEB;
+  --secondary-light: #FCD34D;
+  --secondary: #F59E0B;      /* Original */
+  --secondary-dark: #D97706;
+  --secondary-darkest: #78350F;
+
+  /* --- Neutral (Slate/Gray) --- */
+  --neutral-lightest: #F8FAFC;
+  --neutral-light: #CBD5E1;
+  --neutral: #64748B;        /* Original */
+  --neutral-dark: #334155;
+  --neutral-darkest: #0F172A;
+
+  /* --- Backgrounds --- */
+  --background: #FFFFFF;     /* Original */
+  --background-alt: #F1F5F9; /* Off-white for sectioning */
+}
