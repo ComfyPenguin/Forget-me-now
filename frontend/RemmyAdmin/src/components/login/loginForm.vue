@@ -20,15 +20,8 @@ const handleSubmit = () => {
     <form @submit.prevent="handleSubmit" class="login-form">
       <div class="form-group">
         <label for="email" class="form-label">Email Address</label>
-        <input
-          id="email"
-          v-model.trim="loginForm.email"
-          type="email"
-          autocomplete="email"
-          required
-          placeholder="name@organization.org"
-          class="form-input"
-        />
+        <input id="email" v-model.trim="loginForm.email" type="email" autocomplete="email" required
+          placeholder="name@organization.org" class="form-input" />
       </div>
 
       <div class="form-group">
@@ -36,27 +29,16 @@ const handleSubmit = () => {
           <label for="password" class="form-label">Password</label>
           <a href="#" class="forgot-password">Forgot Password?</a>
         </div>
-        <input
-          id="password"
-          v-model="loginForm.password"
-          type="password"
-          autocomplete="current-password"
-          required
-          placeholder="••••••••"
-          class="form-input"
-        />
+        <input id="password" v-model="loginForm.password" type="password" autocomplete="current-password" required
+          placeholder="••••••••" class="form-input" />
       </div>
 
       <div class="checkbox-group">
-        <input
-          id="remember"
-          v-model="rememberDevice"
-          class="checkbox-input"
-        />
+        <input id="remember" v-model="rememberDevice" class="checkbox-input" />
         <label for="remember" class="checkbox-label">Remember this device</label>
       </div>
 
-      <BaseButton variant="primary" label="Log In →" :animationEnabled="false" @click="handleSubmit" />
+      <BaseButton variant="primary" label="Log In →" :animationEnabled="false" @click="$router.push('/GestionPanel')" />
     </form>
 
     <div class="footer-section">
@@ -72,7 +54,6 @@ const handleSubmit = () => {
 </template>
 
 <style lang="scss">
-
 @import '../../styles/form.css';
 
 .text-center {
@@ -96,8 +77,4 @@ const handleSubmit = () => {
   padding-top: 1.5rem;
   text-align: center;
 }
-
-
-
-
 </style>

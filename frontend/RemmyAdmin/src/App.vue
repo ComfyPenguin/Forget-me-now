@@ -1,67 +1,65 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const router = useRouter()
+const route = useRoute()
+
+const isLoading = ref(true)           // ← importante para evitar flash de contenido
+
+// Ejecutamos la verificación lo antes posible
+onMounted(async () => {
+  try {
+    // Si tu auth necesita validar token con API (recomendado)
+    //await auth.checkAuth()           // o auth.init() / auth.validateSession()
+  } catch (err) {
+    console.error('Error al verificar sesión', err)
+  } finally {
+    isLoading.value = false
+  }
+})
 </script>
 
 <template>
-  <!-- Navigation always stays at the top -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <RouterLink to="/" class="nav-link">Home</RouterLink>
-      <RouterLink to="/login" class="nav-link">Login</RouterLink>
-      <RouterLink to="/GestionPanel" class="nav-link">Gestion Panel</RouterLink>
-      <RouterLink to="/CreateCenter" class="nav-link">CreateCenter</RouterLink>
-
+  <div class="app-container">
+    <!-- Mientras verificamos auth (muy rápido, pero evita contenido parpadeante) -->
+    <div v-if="isLoading" class="loading-screen">
+      <div class="spinner"></div>
+      <p>Cargando...</p>
     </div>
-  </nav>
-  <main class="main-content">
-    <RouterView />
-  </main>
+
+    <!-- Contenido real de la app (solo se muestra cuando ya sabemos si está logueado o no) -->
+    <div v-else>
+      <router-view />
+    </div>
+  </div>
 </template>
-
 <style scoped>
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  /* ← you can change this value */
-  background-color: white;
-  border-bottom: 1px solid #e5e7eb;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+.app-container {
+  min-height: 100vh;
 }
 
-.nav-container {
-  margin: 0 auto;
-  height: 100%;
-  padding: 0 1.5rem;
-
+.loading-screen {
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
+  justify-content: center;
+  background: #f8f9fa;
 }
 
-.nav-link {
-  text-decoration: none;
-  color: #374151;
-  font-weight: 500;
-  font-size: 1.05rem;
-  padding: 0.5rem 0;
-  transition: all 0.2s;
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
 }
 
-.nav-link:hover {
-  color: #2563eb;
-}
-
-.nav-link.router-link-exact-active {
-  color: #2563eb;
-  border-bottom: 2px solid #2563eb;
-}
-
-.main-content {
-  margin-top: 64px;
-  min-height: calc(100vh - 64px);
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

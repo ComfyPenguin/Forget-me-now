@@ -10,7 +10,7 @@ const handleClick = () => {
 <template>
     <div class="gestion-panel">
         <h1>Gestion Panel</h1>
-        <BaseButton variant="primary" @click="handleClick">
+        <BaseButton variant="primary" @click="handleClick, $router.push('/CreateCenter')" >
             Nuevo Centro
         </BaseButton>
     </div>
