@@ -3,7 +3,7 @@ package com.bloste_software.infraestructure.repository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.bloste_software.domain.models.entities.User;
+import com.bloste_software.domain.models.entities.users.User;
 import com.bloste_software.domain.repository.UserRepository;
 import com.bloste_software.infraestructure.repository.jpa.UserJpaRepository;
 import com.bloste_software.presentation.dtos.UserDTO;
@@ -15,7 +15,7 @@ public class UserRepositoyImpl implements UserRepository {
     public UserRepositoyImpl(UserJpaRepository jpaRepository) {
         this.jpaRepository = jpaRepository;
     }
-    
+
     @Override
     public List<UserDTO> getAllUsers() {
         return jpaRepository.findAll()

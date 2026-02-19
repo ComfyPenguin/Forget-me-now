@@ -1,15 +1,15 @@
-package com.bloste_software.domain.models.entities;
+package com.bloste_software.domain.models.entities.users;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,25 +18,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table
-public class Location implements Serializable{
+public class UserRole implements Serializable {
     @Serial
     private static final Long serialVersionUID=17L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_location")
-    private Integer id;
-
-    @Column(name = "postal_code")
-    private Integer postalCode;
+    @Column(name = "id_role")
+    private Long id;
 
     @Column
     private String name;
 
-
     // Relaciones
-    @ManyToOne
-    @JoinColumn(name = "id_city", nullable = false)
-    private City idCity;
-    
+    @OneToMany(mappedBy = "id_user")
+    private List<User> users; 
 }

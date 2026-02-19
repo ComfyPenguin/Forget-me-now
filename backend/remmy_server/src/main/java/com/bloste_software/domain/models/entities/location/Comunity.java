@@ -1,4 +1,4 @@
-package com.bloste_software.domain.models.entities;
+package com.bloste_software.domain.models.entities.location;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -12,13 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table
-public class Province implements Serializable {
+public class Comunity implements Serializable {
     @Serial
     private static final Long serialVersionUID=17L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_province")
+    @Column(name = "id_comunity")
     private Long id;
 
     @Column
@@ -26,6 +26,6 @@ public class Province implements Serializable {
 
     // Relaciones
     @ManyToOne
-    @JoinColumn(name = "id_comunity", nullable = false)
-    private Comunity comunity;
+    @JoinColumn(name = "id_region", nullable = false)
+    private Region region;
 }

@@ -22,7 +22,7 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
                 // Permite acceso público a registro y login
-                .requestMatchers("/api/usuarios").permitAll()
+                .requestMatchers("/api/users").permitAll()
                 .requestMatchers("/api/login").permitAll()    
 
               

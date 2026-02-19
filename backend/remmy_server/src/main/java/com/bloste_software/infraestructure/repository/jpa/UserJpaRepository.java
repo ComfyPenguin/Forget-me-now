@@ -3,7 +3,7 @@ package com.bloste_software.infraestructure.repository.jpa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.bloste_software.domain.models.entities.User;
+import com.bloste_software.domain.models.entities.users.User;
 
 @Repository
 public interface UserJpaRepository extends JpaRepository<User, Long> {

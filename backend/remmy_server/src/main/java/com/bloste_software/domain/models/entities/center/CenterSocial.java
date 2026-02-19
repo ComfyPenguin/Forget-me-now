@@ -1,4 +1,4 @@
-package com.bloste_software.domain.models.entities;
+package com.bloste_software.domain.models.entities.center;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serial;
 import java.io.Serializable;
 
+import com.bloste_software.domain.models.entities.contact.Social;
 import com.bloste_software.domain.models.relationships.CenterSocialId;
 
 @Data

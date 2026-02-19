@@ -1,4 +1,4 @@
-package com.bloste_software.domain.models.entities;
+package com.bloste_software.domain.models.entities.users;
 
 import jakarta.persistence.*;
 import lombok.Data;

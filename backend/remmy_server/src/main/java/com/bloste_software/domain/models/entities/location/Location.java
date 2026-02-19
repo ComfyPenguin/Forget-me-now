@@ -1,4 +1,4 @@
-package com.bloste_software.domain.models.entities;
+package com.bloste_software.domain.models.entities.location;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -18,24 +18,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table
-public class City implements Serializable{
+public class Location implements Serializable{
     @Serial
     private static final Long serialVersionUID=17L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_city")
-    private Long id;
+    @Column(name = "id_location")
+    private Integer id;
+
+    @Column(name = "postal_code")
+    private Integer postalCode;
 
     @Column
     private String name;
 
-    @Column
-    private Integer INE;
 
     // Relaciones
     @ManyToOne
-    @JoinColumn(name = "id_province", nullable = false)
-    private Province province;
+    @JoinColumn(name = "id_city", nullable = false)
+    private City idCity;
     
 }

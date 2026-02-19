@@ -1,4 +1,4 @@
-package com.bloste_software.domain.models.entities;
+package com.bloste_software.domain.models.entities.center;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -8,6 +8,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.bloste_software.domain.models.entities.location.Location;
 
 @Data
 @NoArgsConstructor
@@ -26,7 +28,7 @@ public class Center implements Serializable {
     private String name;
 
     @Column
-    private String street;
+    private String address;
 
     @Column
     private String description;

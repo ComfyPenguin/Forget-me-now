@@ -2,8 +2,8 @@ package com.bloste_software.presentation.dtos;
 
 import java.time.LocalDateTime;
 
-import com.bloste_software.domain.models.entities.User;
-import com.bloste_software.domain.models.entities.UserRole;
+import com.bloste_software.domain.models.entities.users.User;
+import com.bloste_software.domain.models.entities.users.UserRole;
 
 import lombok.Data;
 
