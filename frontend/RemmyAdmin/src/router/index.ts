@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/loginView.vue'
 import GestionPanelView from '@/views/gestionPanelView.vue'
 import NewCenterView from '@/views/NewCenterView.vue'
 import RegisterView from '@/views/registerView.vue'
+import ComponentsTestView from '@/views/componentsTestView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +27,11 @@ const router = createRouter({
       path: '/Register',
       name: 'Register',
       component: RegisterView,
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: ComponentsTestView,
     },
     {
       path: '/:pathMatch(.*)*',

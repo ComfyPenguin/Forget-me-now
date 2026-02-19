@@ -9,9 +9,9 @@ const handleClick = () => {
 </script>
 
 <template>
-    <div class="gestion-panel">
+    <div>
         <h1>Gestion Panel</h1>
-        <BaseButton variant="primary" @click="handleClick, $router.push('/CreateCenter')" >
+        <BaseButton variant="primary" :animation-enabled=true @click="handleClick, $router.push('/CreateCenter')" >
             Nuevo Centro
         </BaseButton>
     </div>
@@ -22,11 +22,15 @@ const handleClick = () => {
 </template>
 
 <style scoped>
-.gestion-panel {
-    padding: 20px;
-}
-
-.gestion-panel h1 {
-    margin-bottom: 20px;
+.gestion-panel-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  z-index: 100;
 }
 </style>
