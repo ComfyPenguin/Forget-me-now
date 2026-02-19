@@ -31,10 +31,8 @@ public class UserDTO {
         this.updatedAt = updatedAt;
     }
 
-    // =========================
     // ENTITY → DTO
-    // =========================
-    public static UserDTO fromEntity(User user) {
+    public static UserDTO convertToDTO(User user) {
         if (user == null) return null;
 
         UserDTO dto = new UserDTO();
@@ -52,9 +50,7 @@ public class UserDTO {
         return dto;
     }
 
-    // =========================
     // DTO → ENTITY
-    // =========================
     public User toEntity() {
         User user = new User();
         user.setId(this.id); // útil para updates
