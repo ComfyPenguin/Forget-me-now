@@ -11,7 +11,7 @@ import com.bloste_software.remmy_server.presentation.dtos.UserDTO;
 public class postUserUseCase {
     
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder; // 👈 nou
+    private final PasswordEncoder passwordEncoder; 
 
     public postUserUseCase(UserRepository userRepository,
                           PasswordEncoder passwordEncoder) {
