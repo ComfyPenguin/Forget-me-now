@@ -34,7 +34,7 @@ const handleSubmit = () => {
       </div>
 
       <div class="checkbox-group">
-        <input id="remember" v-model="rememberDevice" class="checkbox-input" />
+        <input id="remember" type="checkbox" v-model="rememberDevice" class="checkbox-input" />
         <label for="remember" class="checkbox-label">Remember this device</label>
       </div>
 
@@ -57,7 +57,7 @@ const handleSubmit = () => {
 </template>
 
 <style lang="scss">
-@import '../../styles/form.css';
+@import '../../presentation/styles/form.css';
 
 .createAccount {
   display: inline-block; /* O simplemente bórralo si es un <button>, ya que suelen serlo por defecto */

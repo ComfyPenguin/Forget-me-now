@@ -130,5 +130,5 @@ const handleKeyPress = (event: KeyboardEvent) => {
 </template>
 
 <style lang="scss" scoped>
-@import '../../styles/form.css';
+@import '../../presentation/styles/form.css';
 </style>

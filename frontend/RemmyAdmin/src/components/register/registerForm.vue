@@ -177,7 +177,7 @@ const handleInputChange = (field: keyof typeof registerForm.value) => {
 </template>
 
 <style lang="scss" scoped>
-@import '../../styles/form.css';
+@import '../../presentation/styles/form.css';
 
 .text-center {
   text-align: center;

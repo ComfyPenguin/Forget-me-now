@@ -97,5 +97,5 @@ const getCharacteristicName = (id: string) => {
 </template>
 
 <style lang="scss" scoped>
-@import '../../styles/form.css';
+@import '../../presentation/styles/form.css';
 </style>
