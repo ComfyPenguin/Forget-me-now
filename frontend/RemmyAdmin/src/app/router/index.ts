@@ -6,32 +6,27 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/presentation/views/loginView.vue'),
+      component: () => import('@/features/Auth/views/loginView.vue'),
     },
     {
       path: '/GestionPanel',
       name: 'GestionPanel',
-      component: () => import('@/presentation/views/gestionPanelView.vue'),
+      component: () => import('@/features/Centers/views/gestionPanelView.vue'),
     },
     {
       path: '/CreateCenter',
       name: 'CreateCenter',
-      component: () => import('@/presentation/views/NewCenterView.vue'),
+      component: () => import('@/features/Centers/views/NewCenterView.vue'),
     },
     {
       path: '/Register',
       name: 'Register',
-      component: () => import('@/presentation/views/registerView.vue'),
+      component: () => import('@/features/Auth/views/registerView.vue'),
     },
     {
       path: '/center/:id',
       name: 'InfoCenter',
-      component: () => import('@/presentation/views/infoCenterView.vue'),
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: () => import('@/presentation/views/componentsTestView.vue'),
+      component: () => import('@/features/Centers/views/infoCenterView.vue'),
     },
     {
       path: '/:pathMatch(.*)*',

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import BaseButton from '@/components/util/baseButton.vue'
+import BaseButton from '@/shared/util/baseButton.vue'
 const loginForm = ref({
   email: '',
   password: ''
@@ -57,7 +57,7 @@ const handleSubmit = () => {
 </template>
 
 <style lang="scss">
-@import '../../presentation/styles/form.css';
+@import '@/assets/styles/global.css';
 
 .createAccount {
   display: inline-block; /* O simplemente bórralo si es un <button>, ya que suelen serlo por defecto */

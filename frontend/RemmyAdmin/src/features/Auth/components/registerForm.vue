@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import BaseButton from '../util/baseButton.vue'
+import BaseButton from '@/shared/util/baseButton.vue'
 const registerForm = ref({
   username: '',
   email: '',

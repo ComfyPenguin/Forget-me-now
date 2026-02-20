@@ -302,7 +302,7 @@ function formatDate(dateString: string): string {
 </script>
 
 <style lang="scss" scoped>
-@import '../../presentation/styles/form.css';
+@import '@/assets/styles/global.css';
 
 .center-details {
   display: flex;
