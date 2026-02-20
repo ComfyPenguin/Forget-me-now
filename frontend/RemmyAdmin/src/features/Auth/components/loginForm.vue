@@ -57,7 +57,7 @@ const handleSubmit = () => {
 </template>
 
 <style lang="scss">
-@import '@/assets/styles/global.css';
+@import '@/assets/styles/form.css';
 
 .createAccount {
   display: inline-block; /* O simplemente bórralo si es un <button>, ya que suelen serlo por defecto */

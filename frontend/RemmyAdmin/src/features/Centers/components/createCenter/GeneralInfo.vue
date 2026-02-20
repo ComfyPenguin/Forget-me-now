@@ -66,5 +66,5 @@ const centerTypes = [
 </template>
 
 <style lang="scss" scoped>
-@import '../../presentation/styles/form.css';
+@import '@/assets/styles/form.css';
 </style>

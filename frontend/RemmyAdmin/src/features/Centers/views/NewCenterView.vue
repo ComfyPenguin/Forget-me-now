@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import BackButton from '@/components/util/backButton.vue'
-import GeneralInfo from '@/components/newCenter/GeneralInfo.vue'
-import Location from '@/components/newCenter/Location.vue'
-import Email from '@/components/newCenter/Email.vue'
-import Phone from '@/components/newCenter/Phone.vue'
-import Characteristics from '@/components/newCenter/Characteristics.vue'
-import Social from '@/components/newCenter/Social.vue'
+import BackButton from '@/shared/util/backButton.vue'
+import GeneralInfo from '@/features/Centers/components/createCenter/GeneralInfo.vue'
+import Location from '@/features/Centers/components/createCenter/Location.vue'
+import Email from '@/features/Centers/components/createCenter/Email.vue'
+import Phone from '@/features/Centers/components/createCenter/Phone.vue'
+import Characteristics from '@/features/Centers/components/createCenter/Characteristics.vue'
+import Social from '@/features/Centers/components/createCenter/Social.vue'
 
 const centerForm = ref({
   name: '',
@@ -98,7 +98,7 @@ const handleCancel = () => {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/form.css';
+@import '@/assets/styles/form.css';
 
 .new-center-outer-wrapper {
   position: fixed;
