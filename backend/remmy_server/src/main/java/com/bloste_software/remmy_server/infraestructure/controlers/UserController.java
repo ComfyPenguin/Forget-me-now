@@ -4,12 +4,17 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bloste_software.remmy_server.application.usecases.user.DeleteUserByEmailUseCase;
+import com.bloste_software.remmy_server.application.usecases.user.UpdateUserByEmailUseCase;
 import com.bloste_software.remmy_server.application.usecases.user.getAllUsersUseCase;
 import com.bloste_software.remmy_server.application.usecases.user.postUserUseCase;
 import com.bloste_software.remmy_server.presentation.dtos.UserDTO;
@@ -24,14 +29,20 @@ public class UserController {
 
     private final getAllUsersUseCase getAllUsers;
     private final postUserUseCase postUser;
+    private final DeleteUserByEmailUseCase deleteUserByEmail;
+    private final UpdateUserByEmailUseCase updateUserByEmail;
  
     
     public UserController(
             getAllUsersUseCase getAllUsers,
-            postUserUseCase postUser) {
+            postUserUseCase postUser,
+            DeleteUserByEmailUseCase deleteUserByEmail,
+            UpdateUserByEmailUseCase updateUserByEmail) {
 
         this.getAllUsers = getAllUsers;
         this.postUser = postUser;
+        this.deleteUserByEmail = deleteUserByEmail;
+        this.updateUserByEmail = updateUserByEmail;
     }
 
     @CrossOrigin(origins = "*")
@@ -46,4 +57,27 @@ public class UserController {
         postUser.execute(user);
         return ResponseEntity.status(201).build();
     }
+
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> delete(@PathVariable String email) {
+        try {
+            deleteUserByEmail.execute(email);
+            return ResponseEntity.noContent().build(); // 204 és més habitual per deletes
+        } catch ( RuntimeException e ) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @PatchMapping("/{email}")
+    public ResponseEntity<Void> update(@PathVariable String email, @RequestBody UserDTO user) {
+        try {
+            updateUserByEmail.execute(email, user.getUsername(), user.getPassword());
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
 }

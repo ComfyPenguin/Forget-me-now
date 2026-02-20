@@ -33,6 +33,11 @@ public class UserRepositoyImpl implements UserRepository {
     }
 
     @Override
+    public void saveEntity(Users user) {
+        jpaRepository.save(user);
+    }
+
+    @Override
     public void deleteByEmail(String email) {
         jpaRepository.deleteByEmail(email);
     }
@@ -46,18 +51,18 @@ public class UserRepositoyImpl implements UserRepository {
     }
 
     @Override
-    public void existsByEmail(String email) {
-        jpaRepository.existsByEmail(email);
+    public boolean existsByEmail(String email) {
+        return jpaRepository.existsByEmail(email);
     }
 
     @Override
-    public void findByEmail(String email) {
-        jpaRepository.findByEmail(email);
+    public Users findByEmail(String email) {
+        return jpaRepository.findByEmail(email);
     }
 
-	// @Override
-	// public void editByEmail(String email) {
-    //     jpaRepository.editByEmail(email);
-	// }
+	@Override
+	public void editByEmail(String email) {
+        jpaRepository.existsByEmail(email);
+	}
     
 }

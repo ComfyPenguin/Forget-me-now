@@ -2,7 +2,7 @@ package com.bloste_software.remmy_server.domain.repository;
 
 import java.util.List;
 
-
+import com.bloste_software.remmy_server.domain.models.entities.users.Users;
 import com.bloste_software.remmy_server.presentation.dtos.UserDTO;
 
 
@@ -14,6 +14,8 @@ public interface UserRepository {
     // Guardar usuario
     void save(UserDTO user);
 
+    void saveEntity(Users user);
+
     // Borrar usuario por email
     void deleteByEmail(String email);
 
@@ -21,11 +23,11 @@ public interface UserRepository {
     void saveAll(List<UserDTO> users);
 
     // Verificar si un usuario ya existe por email
-    void existsByEmail(String email);
+    boolean existsByEmail(String email);
 
     // Encontrar usuario por email
-    void findByEmail(String email);
+    Users findByEmail(String email);
 
     // Editar usuario por email
-    // void editByEmail(String email);
+    void editByEmail(String email);
 }
