@@ -13,19 +13,19 @@ import com.bloste_software.remmy_server.presentation.dtos.UserDTO;
 @Component
 public class UpdateUserByIdUseCase {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UpdateUserByIdUseCase(UserRepository repository,
-                                PasswordEncoder passwordEncoder) {
-        this.repository = repository;
+    public UpdateUserByIdUseCase(UserRepository userRepository,
+                                 PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Users execute(Long id, UserDTO dto) {
+    public boolean execute(Long id, UserDTO dto) {
 
-        Users user = repository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        Users user = userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
         // Username
         if (dto.getUsername() != null && !dto.getUsername().isBlank()) {
@@ -37,7 +37,7 @@ public class UpdateUserByIdUseCase {
             user.setEmail(dto.getEmail());
         }
 
-        // Password (BCrypt)
+        // Password → ENCRIPTAR AQUÍ
         if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
             String hashed = passwordEncoder.encode(dto.getPassword());
             user.setPasswordHashed(hashed);
@@ -53,8 +53,8 @@ public class UpdateUserByIdUseCase {
         // Timestamp
         user.setUpdatedAt(LocalDateTime.now());
 
-        repository.saveEntity(user);
+        userRepository.saveEntity(user);
 
-        return user;
+        return true;
     }
 }

@@ -71,7 +71,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @DeleteMapping("/{email}")
+    @DeleteMapping("/email/{email}")
     public ResponseEntity<Void> delete(@PathVariable String email) {
         try {
             deleteUserByEmail.execute(email);
@@ -82,7 +82,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @PatchMapping("/{email}")
+    @PatchMapping("/email/{email}")
     public ResponseEntity<Void> update(@PathVariable String email, @RequestBody UserDTO user) {
         try {
             updateUserByEmail.execute(email, user.getUsername(), user.getPassword());
@@ -93,7 +93,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<UserDTO> getById(@PathVariable Long id) {
         UserDTO user = getUserById.execute(id);
         if (user != null) {
@@ -104,7 +104,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         try {
             deleteUserById.execute(id);
@@ -115,10 +115,10 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @PatchMapping("/{id}")
+    @PatchMapping("/id/{id}")
     public ResponseEntity<Void> updateById(@PathVariable Long id, @RequestBody UserDTO user) {
         try {
-            updateUserById.execute(id, user.getUsername(), user.getPassword());
+            updateUserById.execute(id, user);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

@@ -1,6 +1,7 @@
 package com.bloste_software.remmy_server.infraestructure.repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.bloste_software.remmy_server.domain.models.entities.users.Users;
 import com.bloste_software.remmy_server.domain.repository.UserRepository;
 import com.bloste_software.remmy_server.infraestructure.repository.jpa.UserJpaRepository;
 import com.bloste_software.remmy_server.presentation.dtos.UserDTO;
+import com.bloste_software.remmy_server.config.SecurityConfig;
 
 @Service
 public class UserRepositoyImpl implements UserRepository {
@@ -31,6 +33,11 @@ public class UserRepositoyImpl implements UserRepository {
     @Override
     public void save(UserDTO userDTO) {
         jpaRepository.save(userDTO.toEntity());
+    }
+
+     @Override
+    public boolean existsById(Long id) {
+        return jpaRepository.existsById(id);
     }
 
     @Override
@@ -93,7 +100,7 @@ public class UserRepositoyImpl implements UserRepository {
 
         // Password → se encripta con BCrypt
         if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
-            entity.setPasswordHashed(passwordEncoder.encode(dto.getPassword()));
+            entity.setPasswordHashed(dto.getPassword()); 
         }
 
         // Role
@@ -107,6 +114,12 @@ public class UserRepositoyImpl implements UserRepository {
         entity.setUpdatedAt(java.time.LocalDateTime.now());
 
         jpaRepository.save(entity);
+    }
+
+
+   @Override
+    public Optional<Users> findById(Long id) {
+        return jpaRepository.findById(id);
     }
     
 }
