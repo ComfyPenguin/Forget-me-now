@@ -11,19 +11,19 @@ const props = defineProps({
 const newPhone = ref('')
 const phoneError = ref('')
 
-// Initialize phone array if doesn't exist
+// Inicia la array si no existe
 if (!Array.isArray(props.form.phone)) {
   props.form.phone = []
 }
 
 const validatePhone = (phone: string): boolean => {
-  // Accept various phone formats: +34 600 000 000, 600000000, +34600000000, etc.
+  // Acepta numeros con o sin codigo de pais
   const phoneRegex = /^(\+\d{1,3})?\s?(\d{1,4}[\s\-]?)*\d{1,4}$/
   return phoneRegex.test(phone.replace(/\s/g, '')) && phone.replace(/\D/g, '').length >= 9
 }
 
 const formatPhone = (phone: string): string => {
-  // Keep the format the user entered
+  // Mantiene el formato del usuario
   return phone.trim()
 }
 
@@ -65,7 +65,7 @@ const handleKeyPress = (event: KeyboardEvent) => {
 <template>
   <section class="form-section">
     <div class="section-header">
-      <div class="section-icon">📱</div>
+      <div class="section-icon"><img src="@/assets/icons/phone-icon.png" alt="Phone Icon" /></div>
       <h2 class="section-title">Números de Teléfono</h2>
     </div>
 
