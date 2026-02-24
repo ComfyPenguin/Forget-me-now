@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.bloste_software.remmy_server.domain.models.entities.users.UserRole;
 import com.bloste_software.remmy_server.domain.models.entities.users.Users;
 import com.bloste_software.remmy_server.domain.repository.UserRepository;
 import com.bloste_software.remmy_server.infraestructure.repository.jpa.UserJpaRepository;
@@ -64,5 +65,48 @@ public class UserRepositoyImpl implements UserRepository {
 	public void editByEmail(String email) {
         jpaRepository.existsByEmail(email);
 	}
+
+    @Override
+    public UserDTO getById(Long id) {
+        return jpaRepository.findById(id).map(UserDTO::convertToDTO).orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        jpaRepository.deleteById(id);
+    }
+
+   @Override
+    public void updateById(Long id, UserDTO dto) {
+        Users entity = jpaRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Username
+        if (dto.getUsername() != null) {
+            entity.setUsername(dto.getUsername());
+        }
+
+        // Email
+        if (dto.getEmail() != null) {
+            entity.setEmail(dto.getEmail());
+        }
+
+        // Password → se encripta con BCrypt
+        if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
+            entity.setPasswordHashed(passwordEncoder.encode(dto.getPassword()));
+        }
+
+        // Role
+        if (dto.getRoleId() != null) {
+            UserRole role = new UserRole();
+            role.setId(dto.getRoleId());
+            entity.setRole(role);
+        }
+
+        // updatedAt
+        entity.setUpdatedAt(java.time.LocalDateTime.now());
+
+        jpaRepository.save(entity);
+    }
     
 }

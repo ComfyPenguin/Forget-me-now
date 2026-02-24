@@ -120,5 +120,9 @@ public class Users implements Serializable {
         this.role = role;
     }
 
+    public static Long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
     
 }

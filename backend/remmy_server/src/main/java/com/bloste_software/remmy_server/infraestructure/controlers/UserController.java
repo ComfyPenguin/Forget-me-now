@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bloste_software.remmy_server.application.usecases.user.DeleteUserByEmailUseCase;
+import com.bloste_software.remmy_server.application.usecases.user.DeleteUserByIdUseCase;
 import com.bloste_software.remmy_server.application.usecases.user.UpdateUserByEmailUseCase;
+import com.bloste_software.remmy_server.application.usecases.user.UpdateUserByIdUseCase;
 import com.bloste_software.remmy_server.application.usecases.user.getAllUsersUseCase;
+import com.bloste_software.remmy_server.application.usecases.user.getUserByIdUseCase;
 import com.bloste_software.remmy_server.application.usecases.user.postUserUseCase;
 import com.bloste_software.remmy_server.presentation.dtos.UserDTO;
 
@@ -31,18 +34,27 @@ public class UserController {
     private final postUserUseCase postUser;
     private final DeleteUserByEmailUseCase deleteUserByEmail;
     private final UpdateUserByEmailUseCase updateUserByEmail;
+    private final UpdateUserByIdUseCase updateUserById;
+    private final getUserByIdUseCase getUserById;
+    private final DeleteUserByIdUseCase deleteUserById;
  
     
     public UserController(
             getAllUsersUseCase getAllUsers,
             postUserUseCase postUser,
             DeleteUserByEmailUseCase deleteUserByEmail,
-            UpdateUserByEmailUseCase updateUserByEmail) {
+            UpdateUserByEmailUseCase updateUserByEmail,
+            UpdateUserByIdUseCase updateUserById,
+            getUserByIdUseCase getUserById,
+            DeleteUserByIdUseCase deleteUserById) {
 
         this.getAllUsers = getAllUsers;
         this.postUser = postUser;
         this.deleteUserByEmail = deleteUserByEmail;
         this.updateUserByEmail = updateUserByEmail;
+        this.updateUserById = updateUserById;
+        this.getUserById = getUserById;
+        this.deleteUserById = deleteUserById;
     }
 
     @CrossOrigin(origins = "*")
@@ -79,5 +91,38 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
     }
-    
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> getById(@PathVariable Long id) {
+        UserDTO user = getUserById.execute(id);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build(); 
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        try {
+            deleteUserById.execute(id);
+            return ResponseEntity.noContent().build(); // 204 és més habitual per deletes
+        } catch ( RuntimeException e ) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @CrossOrigin(origins = "*")
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void> updateById(@PathVariable Long id, @RequestBody UserDTO user) {
+        try {
+            updateUserById.execute(id, user.getUsername(), user.getPassword());
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
