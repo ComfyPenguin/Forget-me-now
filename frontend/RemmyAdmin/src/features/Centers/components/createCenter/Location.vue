@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons/faLocationDot';
+
+
+
 defineProps({
   form: {
     type: Object,
@@ -11,7 +15,7 @@ defineProps({
 <template>
   <section class="form-section">
     <div class="section-header">
-      <div class="section-icon">📍</div>
+      <div class="section-icon"><font-awesome-icon :icon="faLocationDot" /></div>
       <h2 class="section-title">Ubicación</h2>
     </div>
 

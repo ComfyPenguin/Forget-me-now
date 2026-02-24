@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+
 defineProps({
   form: {
     type: Object,
@@ -18,7 +21,7 @@ const centerTypes = [
 <template>
   <section class="form-section">
     <div class="section-header">
-      <div class="section-icon">ℹ️</div>
+      <div class="section-icon"><FontAwesomeIcon :icon="faInfoCircle" /></div>
       <h2 class="section-title">Información General</h2>
     </div>
 

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -59,7 +61,7 @@ const handleKeyPress = (event: KeyboardEvent) => {
 <template>
   <section class="form-section">
     <div class="section-header">
-      <div class="section-icon">✉️</div>
+      <div class="section-icon"><font-awesome-icon :icon="faEnvelope" /></div>
       <h2 class="section-title">Correos Electrónicos</h2>
     </div>
 

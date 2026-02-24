@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { faListCheck} from '@fortawesome/free-solid-svg-icons'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -49,7 +50,7 @@ const getCharacteristicName = (id: string) => {
 <template>
   <section class="form-section">
     <div class="section-header">
-      <div class="section-icon">⭐</div>
+      <div class="section-icon"><font-awesome-icon :icon="faListCheck" /></div>
       <h2 class="section-title">Características del Centro</h2>
     </div>
 

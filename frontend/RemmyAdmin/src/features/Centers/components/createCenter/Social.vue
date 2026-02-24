@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { faShareNodes } from '@fortawesome/free-solid-svg-icons'
 import { ref } from 'vue'
 
 const props = defineProps({
@@ -43,7 +44,7 @@ const isActive = (platformId: string) => {
 <template>
   <section class="form-section">
     <div class="section-header">
-      <div class="section-icon">🌐</div>
+      <div class="section-icon"><font-awesome-icon :icon="faShareNodes" /></div>
       <h2 class="section-title">Redes Sociales</h2>
     </div>
 
