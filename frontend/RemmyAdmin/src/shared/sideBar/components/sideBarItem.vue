@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 
 interface Props {
   label: string
   icon?: string
   to?: string
-  children?: Array<{
-    label: string
-    icon?: string
-    to: string
-  }>
   onClick?: () => void
-  badge?: number | string
-  action?: 'link' | 'button' | 'dropdown'
+  action?: 'link' | 'button'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -26,14 +21,14 @@ const isActive = computed(() => {
   return route.path === props.to || route.path.startsWith(props.to + '/')
 })
 
-const isDropdownOpen = ref(false)
+const showTooltip = ref(false)
 
-import { ref } from 'vue'
+const toggleTooltip = () => {
+  showTooltip.value = !showTooltip.value
+}
 
-const toggleDropdown = () => {
-  if (props.action === 'dropdown') {
-    isDropdownOpen.value = !isDropdownOpen.value
-  }
+const hideTooltip = () => {
+  showTooltip.value = false
 }
 </script>
 
@@ -45,10 +40,12 @@ const toggleDropdown = () => {
       :to="to || '#'"
       class="sidebar-item"
       :class="{ 'sidebar-item--active': isActive }"
+      @mouseenter="showTooltip = true"
+      @mouseleave="showTooltip = false"
+      :title="label"
     >
       <span v-if="icon" class="sidebar-item-icon">{{ icon }}</span>
-      <span class="sidebar-item-label">{{ label }}</span>
-      <span v-if="badge" class="sidebar-item-badge">{{ badge }}</span>
+      <span v-if="showTooltip" class="tooltip">{{ label }}</span>
     </router-link>
 
     <!-- Button Item -->
@@ -56,171 +53,83 @@ const toggleDropdown = () => {
       v-else-if="action === 'button'"
       class="sidebar-item"
       @click="onClick"
+      @mouseenter="showTooltip = true"
+      @mouseleave="showTooltip = false"
+      :title="label"
     >
       <span v-if="icon" class="sidebar-item-icon">{{ icon }}</span>
-      <span class="sidebar-item-label">{{ label }}</span>
-      <span v-if="badge" class="sidebar-item-badge">{{ badge }}</span>
+      <span v-if="showTooltip" class="tooltip">{{ label }}</span>
     </button>
-
-    <!-- Dropdown Item -->
-    <div v-else-if="action === 'dropdown'" class="sidebar-dropdown">
-      <button
-        class="sidebar-item"
-        @click="toggleDropdown"
-      >
-        <span v-if="icon" class="sidebar-item-icon">{{ icon }}</span>
-        <span class="sidebar-item-label">{{ label }}</span>
-        <span class="dropdown-arrow" :class="{ 'dropdown-arrow--open': isDropdownOpen }">
-          ▼
-        </span>
-      </button>
-
-      <!-- Dropdown Children -->
-      <transition name="dropdown">
-        <div v-if="isDropdownOpen" class="sidebar-dropdown-content">
-          <router-link
-            v-for="child in children"
-            :key="child.to"
-            :to="child.to"
-            class="sidebar-dropdown-item"
-            :class="{ 'sidebar-dropdown-item--active': route.path === child.to }"
-          >
-            <span v-if="child.icon" class="sidebar-item-icon">{{ child.icon }}</span>
-            <span class="sidebar-item-label">{{ child.label }}</span>
-          </router-link>
-        </div>
-      </transition>
-    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/form.css';
-
 .sidebar-item-wrapper {
   width: 100%;
 }
 
 .sidebar-item {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
   width: 100%;
-  padding: 0.875rem 1rem;
+  height: 48px;
   background: none;
   border: none;
-  color: var(--neutral);
-  font-size: 0.9rem;
-  font-weight: 500;
+  color: #cbd5e1;
+  font-size: 1.5rem;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s;
-  text-align: left;
-  font-family: inherit;
-  border-left: 3px solid transparent;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
 
   &:hover {
-    background-color: #f1f5f9;
-    color: var(--neutral-darkest);
-    padding-left: 1.25rem;
+    background-color: #334155;
+    color: #f1f5f9;
   }
 
   &--active {
-    background-color: var(--primary-lightest);
-    color: var(--primary);
-    border-left-color: var(--primary);
+    background-color: #3b82f6;
+    color: #ffffff;
     font-weight: 600;
-    padding-left: 1.25rem;
   }
 }
 
 .sidebar-item-icon {
-  font-size: 1.25rem;
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.25rem;
 }
 
-.sidebar-item-label {
-  flex: 1;
+.tooltip {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sidebar-item-badge {
-  background: var(--primary);
-  color: white;
-  border-radius: 12px;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.sidebar-dropdown {
-  width: 100%;
-}
-
-.dropdown-arrow {
-  font-size: 0.7rem;
-  transition: transform 0.2s;
-  flex-shrink: 0;
-
-  &--open {
-    transform: rotate(180deg);
-  }
-}
-
-.sidebar-dropdown-content {
-  background-color: #f8fafc;
-  border-left: 3px solid var(--primary-light);
-}
-
-.sidebar-dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
-  background: none;
-  border: none;
-  color: var(--neutral);
   font-size: 0.85rem;
-  font-weight: 400;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s;
-  text-align: left;
-  font-family: inherit;
-  border-left: 3px solid transparent;
-
-  &:hover {
-    background-color: white;
-    color: var(--neutral-darkest);
-    padding-left: 2.75rem;
+  font-weight: 500;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-right-color: #0f172a;
   }
-
-  &--active {
-    background-color: white;
-    color: var(--primary);
-    border-left-color: var(--primary);
-    font-weight: 600;
-    padding-left: 2.75rem;
-  }
-}
-
-.dropdown-enter-active,
-.dropdown-leave-active {
-  transition: all 0.2s;
-  max-height: 500px;
-  overflow: hidden;
-}
-
-.dropdown-enter-from,
-.dropdown-leave-to {
-  max-height: 0;
-  opacity: 0;
 }
 </style>

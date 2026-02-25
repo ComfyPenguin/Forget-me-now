@@ -23,8 +23,7 @@ import Sidebar from '@/shared/sideBar/components/sideBar.vue'
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #f8fafc;
-  margin-left: 280px;
-  padding: 20px;
+  min-width: 0;
 }
 
 /* Custom scrollbar */
