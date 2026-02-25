@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import {onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
-const isLoading = ref(true)           // ← importante para evitar flash de contenido
+const isLoading = ref(true)
 
-// Ejecutamos la verificación lo antes posible
 onMounted(async () => {
   try {
-    // Si tu auth necesita validar token con API (recomendado)
-    //await auth.checkAuth()           // o auth.init() / auth.validateSession()
+    // Simular carga inicial
+    await new Promise(resolve => setTimeout(resolve, 500))
   } catch (err) {
     console.error('Error al verificar sesión', err)
   } finally {
@@ -17,55 +16,34 @@ onMounted(async () => {
 </script>
 
 <template>
-    <!-- Mientras verificamos auth (muy rápido, pero evita contenido parpadeante) -->
-    <div v-if="isLoading" class="loading-screen">
-      <div class="spinner"></div>
-      <p>Cargando...</p>
-    </div>
+  <!-- Loading Screen -->
+  <div v-if="isLoading" class="loading-screen">
+    <div class="spinner"></div>
+    <p>Cargando...</p>
+  </div>
 
-    <!-- Contenido real de la app (solo se muestra cuando ya sabemos si está logueado o no) -->
-    <div v-else class="app-wrapper">
-  <router-view />
-</div>
+  <!-- App Content -->
+  <div v-else>
+    <router-view />
+  </div>
 </template>
+
 <style scoped>
-/* Asegura que TODO el viewport esté disponible (muy importante) */
 html, body, #app {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
-  width: 100%;
 }
 
-.app-wrapper {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Contenedor que envuelve router-view (crece automáticamente) */
-.main-content {
-  flex: 1 1 auto;              /* ← esto hace que crezca y ocupe todo el espacio sobrante */
-  width: 100%;
-  min-height: 100%;            /* opcional pero útil en algunos navegadores */
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Loading (lo que ya tenías, sin cambios) */
 .loading-screen {
   height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #f8f9fa;
-  width: 100%;                 /* ← asegúrate también aquí */
 }
 
 .spinner {
@@ -79,7 +57,11 @@ html, body, #app {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

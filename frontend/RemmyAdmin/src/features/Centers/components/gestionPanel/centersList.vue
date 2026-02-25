@@ -1,5 +1,5 @@
 <template>
-  <div div class="centers-list-wraper">
+  <div class="centers-list-wraper">
     <table>
       <thead class="thead-style extra-bold">
         <tr class="exo-font ">
@@ -22,26 +22,26 @@
         </tr>
       </tbody>
     </table>
-  <!-- Paginación de la tabla -->
-  <div class='flex items-space justify-between mt-4 navbar'>
-    <div class='navbar-text'>
-      <p>Mostrando <strong>{{ showingEntries }}</strong> centros </p>
+    <!-- Paginación de la tabla -->
+    <div class='flex items-space justify-between mt-4 navbar'>
+      <div class='navbar-text'>
+        <p>Mostrando <strong>{{ showingEntries }}</strong> centros </p>
+      </div>
+      <div class="navbuttons-wrapper top-4">
+        <button class="navbutton" @click="prevPage" :disabled="currentPage === 1">Anterior</button>
+        <span>
+          <button
+            v-for="page in visiblePages"
+            :key="page"
+            @click="currentPage = page"
+            :class="['navbutton', { active: currentPage === page }]"
+          >
+            {{ page }}
+          </button>
+        </span>
+        <button class="navbutton" @click="nextPage" :disabled="currentPage === totalPages">Siguiente</button>
+      </div>
     </div>
-    <div class="navbuttons-wrapper top-4">
-    <button class="navbutton" @click="prevPage" :disabled="currentPage === 1">Anterior</button>
-    <span>
-      <button
-        v-for="page in visiblePages"
-        :key="page"
-        @click="currentPage = page"
-        :class="['navbutton', { active: currentPage === page }]"
-      >
-        {{ page }}
-      </button>
-    </span>
-    <button class="navbutton" @click="nextPage" :disabled="currentPage === totalPages">Siguiente</button>
-    </div>
-  </div>
   </div>
 </template>
 
@@ -102,7 +102,6 @@ function editCenter(id: number) {
   console.info(`Edit center with id: ${id}`);
 }
 
-
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
@@ -112,13 +111,12 @@ function editCenter(id: number) {
   border-radius: 8px;
   background-color: var(--background);
   overflow: hidden;
-  overflow-x: auto;
+  width: 100%;
 }
 
 .exo-font {
   font-family: 'Exo 2', sans-serif;
   font-weight: 800;
-
 }
 
 th, td {
@@ -139,10 +137,9 @@ table {
   background-color: var(--neutral-light);
   font-weight: 600;
   color: var(--neutral-dark);
-
 }
 
-.navbar{
+.navbar {
   display: flex;
   flex-direction: row;
   align-items: center;
