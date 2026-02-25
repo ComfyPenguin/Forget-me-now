@@ -1,52 +1,86 @@
 <template>
-  <div class="centers-list-wraper">
-    <table>
-      <thead class="thead-style extra-bold">
-        <tr class="exo-font ">
-          <th>Centro</th>
-          <th>Ubicación</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="center in pagedCenters" :key="center.id">
-          <td>{{ center.name }}</td>
-          <td>{{ center.location }}</td>
-          <td>
-            <button class="action-btn" @click="editCenter(center.id)" aria-label="Editar centro">
-              <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25Zm14.7-9.45a1 1 0 0 0 0-1.41l-1.59-1.59a1 1 0 0 0-1.41 0l-1.5 1.5 3.75 3.75 1.5-1.5Z"/>
-              </svg>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="w-full bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full">
+    <div class="overflow-x-auto flex-1">
+      <table class="w-full text-left border-collapse whitespace-nowrap">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs uppercase tracking-wider font-bold">
+            <th class="py-4 px-6">Centro</th>
+            <th class="py-4 px-6">Ubicación</th>
+            <th class="py-4 px-6 text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 text-slate-800">
+          <tr v-for="center in pagedCenters" :key="center.id" class="hover:bg-blue-50/40 transition-colors group">
+            <td class="py-4 px-6">
+              <span class="font-bold text-slate-900 text-[15px] block">{{ center.name }}</span>
+            </td>
+            <td class="py-4 px-6 text-slate-500 font-medium text-[14px]">
+              <div class="flex items-center">
+                <svg class="w-4 h-4 text-slate-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                {{ center.location }}
+              </div>
+            </td>
+            <td class="py-4 px-6 text-center">
+              <button 
+                class="inline-flex items-center justify-center p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-100/50 rounded-lg transition-all border border-transparent hover:border-blue-200" 
+                @click="editCenter(center.id)" 
+                aria-label="Editar centro"
+              >
+                <svg class="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <!-- Paginación de la tabla -->
-    <div class='flex items-space justify-between mt-4 navbar'>
-      <div class='navbar-text'>
-        <p>Mostrando <strong>{{ showingEntries }}</strong> centros </p>
+    <div class="flex items-center justify-between px-6 py-[18px] bg-slate-50/50 border-t border-slate-200 mt-auto">
+      <div class="text-[13px] text-slate-500">
+        Mostrando <span class="font-bold text-slate-700">{{ showingEntries }}</span> centros
       </div>
-      <div class="navbuttons-wrapper top-4">
-        <button class="navbutton" @click="prevPage" :disabled="currentPage === 1">Anterior</button>
-        <span>
+      <div class="flex items-center space-x-2">
+        <button 
+          @click="prevPage" 
+          :disabled="currentPage === 1"
+          class="px-3.5 py-1.5 text-[13px] font-medium rounded-lg text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 hover:text-slate-900 focus:z-10 focus:ring-2 focus:ring-blue-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+        >
+          Anterior
+        </button>
+        <div class="flex items-center space-x-1">
           <button
             v-for="page in visiblePages"
             :key="page"
             @click="currentPage = page"
-            :class="['navbutton', { active: currentPage === page }]"
+            :class="[
+              'w-[30px] h-[30px] flex items-center justify-center text-[13px] font-medium rounded-lg transition-all',
+              currentPage === page 
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 border border-blue-600' 
+                : 'text-slate-600 border border-slate-200 bg-white hover:bg-slate-50'
+            ]"
           >
             {{ page }}
           </button>
-        </span>
-        <button class="navbutton" @click="nextPage" :disabled="currentPage === totalPages">Siguiente</button>
+        </div>
+        <button 
+          @click="nextPage" 
+          :disabled="currentPage === totalPages"
+          class="px-3.5 py-1.5 text-[13px] font-medium rounded-lg text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 hover:text-slate-900 focus:z-10 focus:ring-2 focus:ring-blue-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+        >
+          Siguiente
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref , computed} from 'vue'
+import { ref, computed } from 'vue'
 
 class Center {
   constructor(
@@ -57,20 +91,24 @@ class Center {
 }
 
 const centers = ref<Center[]>([
-  new Center(1, 'Center A', 'Location A'),
-  new Center(2, 'Center B', 'Location B'),
-  new Center(3, 'Center C', 'Location C'),
-  new Center(4, 'Center D', 'Location D'),
-  new Center(5, 'Center E', 'Location E'),
-  new Center(6, 'Center F', 'Location F'),
-  new Center(7, 'Center G', 'Location G'),
-  new Center(8, 'Center H', 'Location H'),
-  new Center(9, 'Center I', 'Location I'),
-  new Center(10, 'Center J', 'Location J'),
+  new Center(1, 'Centro Esperanza', 'Madrid, ES'),
+  new Center(2, 'Refugio San José', 'Barcelona, ES'),
+  new Center(3, 'Apoyo Comunitario', 'Sevilla, ES'),
+  new Center(4, 'Auxilio Temporal', 'Valencia, ES'),
+  new Center(5, 'Casa de la Paz', 'Zaragoza, ES'),
+  new Center(6, 'Esperanza Norte', 'Bilbao, ES'),
+  new Center(7, 'Centro Solidario', 'Málaga, ES'),
+  new Center(8, 'Refugio del Sol', 'Murcia, ES'),
+  new Center(9, 'Mano Amiga', 'Palma, ES'),
+  new Center(10, 'Luz y Esperanza', 'Las Palmas, ES'),
+  new Center(11, 'Centro de Acogida', 'Alicante, ES'),
+  new Center(12, 'Ayuda Pronta', 'Córdoba, ES'),
+  new Center(13, 'Corazón Abierto', 'Valladolid, ES'),
+  new Center(14, 'Centro de Ayuda Global', 'Vigo, ES'),
 ]);
 
 const currentPage = ref(1);
-const rowsPerPage = 3;
+const rowsPerPage = 6;
 const totalPages = computed(() => Math.ceil(centers.value.length / rowsPerPage));
 const visiblePages = computed(() => {
   const total = totalPages.value;
@@ -80,7 +118,9 @@ const visiblePages = computed(() => {
 });
 
 const showingEntries = computed(() => {
-  return `${pagedCenters.value.length} de ${centers.value.length}`;
+  const startEntry = (currentPage.value - 1) * rowsPerPage + 1;
+  const endEntry = Math.min(currentPage.value * rowsPerPage, centers.value.length);
+  return `${startEntry}-${endEntry} de ${centers.value.length}`;
 });
 
 const pagedCenters = computed(() => {
@@ -101,114 +141,8 @@ function editCenter(id: number) {
   // TODO: route to edit page using center id
   console.info(`Edit center with id: ${id}`);
 }
-
 </script>
+
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
-
-.centers-list-wraper {
-  border: 1px solid var(--neutral-light);
-  border-radius: 8px;
-  background-color: var(--background);
-  overflow: hidden;
-  width: 100%;
-}
-
-.exo-font {
-  font-family: 'Exo 2', sans-serif;
-  font-weight: 800;
-}
-
-th, td {
-  text-align: left;
-  border-top: var(--neutral-light) 0.25px solid;
-  padding: 12px 16px;
-  padding: 8px;
-}
-
-table {
-  margin: 0;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.thead-style {
-  font-family: Exo 2, sans-serif;
-  background-color: var(--neutral-light);
-  font-weight: 600;
-  color: var(--neutral-dark);
-}
-
-.navbar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  margin-top: 0;
-  background-color: var(--background-alt);
-}
-
-.navbar-text {
-  font-family: Exo 2, sans-serif;
-  font-weight: 500;
-  color: var(--neutral-dark);
-  text-align: left;
-}
-
-.navbuttons-wrapper {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.navbutton.active {
-  background: var(--primary);
-  color: var(--background);
-  border-color: var(--primary);
-}
-
-.navbutton:hover:not(:disabled) {
-  background: var(--primary);
-  color: var(--background);
-  border-color: var(--primary);
-}
-
-.navbutton {
-  background: transparent;
-  color: var(--neutral-dark);
-  border: 1px solid var(--neutral);
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  margin: 0 0.25rem;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-}
-
-.navbutton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.action-btn {
-  background: transparent;
-  border: 1px solid var(--neutral);
-  color: var(--neutral);
-  border-radius: 8px;
-  padding: 0.35rem 0.5rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.action-btn:hover {
-  border-color: var(--neutral-dark);
-  color: var(--neutral-dark);
-}
-
-.action-icon {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
+/* No CSS needed, fully styled with Tailwind CSS */
 </style>
