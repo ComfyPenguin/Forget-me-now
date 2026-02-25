@@ -57,20 +57,20 @@ public class UserController {
         this.deleteUserById = deleteUserById;
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*") // okey
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAll() {
         return ResponseEntity.ok(getAllUsers.execute());
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*") //okey
     @PostMapping
        public ResponseEntity<Void> create(@RequestBody UserDTO user) {
         postUser.execute(user);
         return ResponseEntity.status(201).build();
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*") //okey
     @DeleteMapping("/email/{email}")
     public ResponseEntity<Void> delete(@PathVariable String email) {
         try {
@@ -81,7 +81,7 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*") //okey
     @PatchMapping("/email/{email}")
     public ResponseEntity<Void> update(@PathVariable String email, @RequestBody UserDTO user) {
         try {
@@ -92,7 +92,7 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*") //okey
     @GetMapping("/id/{id}")
     public ResponseEntity<UserDTO> getById(@PathVariable Long id) {
         UserDTO user = getUserById.execute(id);
@@ -103,7 +103,7 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*") //okey
     @DeleteMapping("/id/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         try {
@@ -114,7 +114,7 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "*")
+    @CrossOrigin(origins = "*") //okey
     @PatchMapping("/id/{id}")
     public ResponseEntity<Void> updateById(@PathVariable Long id, @RequestBody UserDTO user) {
         try {
