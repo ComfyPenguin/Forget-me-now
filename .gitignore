@@ -1,0 +1,58 @@
+# Backend - Maven
+backend/remmy_server/target/
+backend/remmy_server/.classpath
+backend/remmy_server/.project
+backend/remmy_server/.settings/
+backend/remmy_server/bin/
+backend/remmy_server/*.jar
+backend/remmy_server/*.class
+backend/remmy_server/.vscode/
+**/.vscode/
+
+# Frontend - Node.js / npm
+frontend/RemmyAdmin/node_modules/
+frontend/RemmyAdmin/dist/
+frontend/RemmyAdmin/.DS_Store
+frontend/RemmyAdmin/dist-ssr/
+frontend/RemmyAdmin/coverage/
+frontend/RemmyAdmin/.nyc_output/
+
+# IDE
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Build outputs
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Maven specific
+.mvn/
+mvnw.cmd
+.factorypath
